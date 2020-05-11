@@ -73,13 +73,13 @@
 }
 .store-data{
     padding:6px;
-    height: 83%;
+    height: 71%;
     overflow: scroll;
     .store-wrap{
         border-bottom:3px solid rgba(255, 255, 255, 0.8);
         border-radius: 5px ;
-        padding: 22px 5px;
-        margin-bottom: 20px;
+        padding: 12px 5px;
+        margin-bottom: 10px;
         cursor: pointer;
         h3{
             font-size: 1.5rem;
@@ -181,6 +181,9 @@
         width: 25%;
         min-width: 400px;
         padding: 0;
+    }
+    .store-data{
+        height: 80%;
     }
     #map{
         width: 100%;
