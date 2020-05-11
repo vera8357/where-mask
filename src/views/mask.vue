@@ -24,11 +24,11 @@
           <h3>{{item.properties.name}}</h3>
           <div>
             <span class="mask-num" :class="{'mask-safety': item.properties.mask_adult > 200,'mask-danger':item.properties.mask_adult<=200}">
-              成人口罩
+              <p>成人口罩</p>
               <b>{{item.properties.mask_adult}}</b>/片
             </span>
             <span class="mask-num" :class="{'mask-safety': item.properties.mask_child > 200,'mask-danger':item.properties.mask_child<=200}">
-              小孩口罩
+              <p>小孩口罩</p>
               <b>{{item.properties.mask_child}}</b>/片
             </span>
           </div>
