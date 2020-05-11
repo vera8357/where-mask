@@ -1,0 +1,222 @@
+@import "./resete";
+*{
+    box-sizing: border-box;
+}
+.d-none{
+    display: none;
+}
+
+.wrap-flex{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+.region-wrap{
+    width: 100%;
+    background-color: rgba(180,180,180,.3);
+    margin-right: 10px;
+    padding:8% 12%;
+}
+.region-selsec{
+    &:after{
+        content: '';
+        display:block;
+        width: 100%;
+        height: 3px;
+        margin-top: .5rem;
+        border-bottom: 1px solid rgba(180,180,180,1);
+    }
+    .county,.area{
+        padding:6px;
+    }
+    select{
+        width: 100%;
+        padding: 10px 1rem;
+        font-size: 1.1rem;
+        border-radius: 5px;
+    }
+    .search-wrap{
+        margin: 10px;
+        text-align: center;
+        button{
+            width:80%;
+            padding:5px;
+            letter-spacing: 4px;
+            border-radius: 10px;
+            font-weight: bold;
+            border:1px solid rgb(243, 140, 71);
+            color:#fff;
+            background-color: rgb(245, 157, 98);
+            outline: none;
+            box-shadow: 1PX 2PX 4PX 2PX rgb(206, 204, 204);
+            box-shadow: -1PX 2PX 4PX 2PX rgb(206, 204, 204);
+            cursor: pointer;
+            &:hover{
+                background-color: #fff;
+            color:rgb(243, 140, 71);
+            }
+        }
+        .reload{
+            display: flex;
+            justify-content: space-around;
+            margin-top: 12px;
+            font-size: .6rem;
+            a{
+                outline: none;
+                text-decoration: none;
+                color:#888;
+            }
+        }
+    }
+}
+.store-data{
+    min-width: 375px;
+    padding:6px;
+    height: 100%;
+    overflow: scroll;
+    .store-wrap{
+        min-width: 350px;
+        border-bottom:3px solid rgba(255, 255, 255, 0.8);
+        border-radius: 5px ;
+        padding: 22px 5px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        h3{
+            font-size: 1.5rem;
+            font-weight: bolder;
+            line-height: 2rem;
+
+        }
+        p{
+            font-size: .8rem;
+            line-height: 1.3rem;
+            b{
+                font-weight:bold;
+            }
+        }
+        .mask-num{
+            display: inline-block;
+            width: 50%;
+            text-align: center;
+            padding: 18px 10px;
+            color: #fff;
+            outline:3px solid #fff;
+            border-radius: 5px;
+            b{
+                display: inline-block;
+                margin-top: 5px;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+.mask-safety{
+    background-color: rgba(54, 153, 15, 0.836);
+}
+.mask-danger{
+    background-color: rgba(179, 22, 61, 0.8);
+}
+.mask-map{
+    display: none;
+}
+
+
+
+.msg-prompt{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    z-index: 1000;
+    background-color: rgba(200,200,200,.6);
+}
+
+.msg-content{
+    width: 25%;
+    min-width: 280PX;
+    margin: auto;
+    margin-top:150px;
+    text-align: center;
+    border:1px solid #ccc;
+    padding:30px 6px; 
+    border-radius: 5px;
+    background-color: #fff;
+    h2{
+        font-size:1.2rem;
+        line-height: 1.7rem;
+    }
+    p{
+
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    a{
+        display: inline-block;
+        width:30%;
+        margin-top: 30px;
+        padding: 8px;
+        letter-spacing: 4px;
+        border-radius: 10px;
+        font-weight: bold;
+        border:1px solid rgb(243, 140, 71);
+        color:#fff;
+        background-color: rgb(245, 157, 98);
+        outline: none;
+        box-shadow: 1PX 2PX 4PX 2PX rgb(206, 204, 204);
+        box-shadow: -1PX 2PX 4PX 2PX rgb(206, 204, 204);
+        &:hover{
+            background-color: #fff;
+            color:rgb(243, 140, 71);
+        }
+    }
+
+}
+
+@media (min-width: 992px) {
+    .region-wrap{
+        width: 25%;
+        min-width: 400px;
+        padding: 0;
+    }
+    #map{
+        width: 100%;
+        height: 100%;
+    }
+    .mask-map{
+        display: block;
+        width: 80%;
+    }
+    .mark-content{
+        text-decoration: none;
+        h3{
+            font-size: 1.5rem;
+            font-weight: bolder;
+            color: #000;
+        }
+        span{
+            font-weight: bolder;
+        }
+        p{
+            background-color: rgb(245, 157, 98);
+            margin:3px 0;
+            color: #fff;
+            font-size: 1.2rem;
+            text-align: center;
+            span{
+                font-size: 1.5rem;
+            }
+        }
+        .mask-safety{
+            background-color: rgba(54, 153, 15, 0.836);
+        }
+        .mask-danger{
+            background-color: rgba(179, 22, 61, 0.8);
+        }
+    }
+}

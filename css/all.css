@@ -1,0 +1,153 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.wrap-flex {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+}
+
+.region-wrap {
+  width: 20%;
+  min-width: 230px;
+  background-color: rgba(180, 180, 180, 0.3);
+  margin-right: 10px;
+}
+
+.region-selsec:after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 3px;
+  margin-top: .5rem;
+  border-bottom: 1px solid #b4b4b4;
+}
+
+.region-selsec .county, .region-selsec .area {
+  padding: 6px;
+}
+
+.region-selsec h2 {
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+}
+
+.region-selsec select {
+  width: 100%;
+  padding: 3px 2px;
+  font-size: 1.1rem;
+}
+
+.region-selsec .btn {
+  padding: 6px;
+  text-align: center;
+}
+
+.region-selsec .btn button {
+  width: 80%;
+  padding: 2px 0;
+  letter-spacing: .5rem;
+  border-radius: 10px;
+  border: 1px solid #b4b4b4;
+  -webkit-box-shadow: 0 3px 3px #bbb;
+          box-shadow: 0 3px 3px #bbb;
+  outline: none;
+  cursor: pointer;
+}
+
+.region-selsec .btn button:hover {
+  background-color: #fff;
+}
+
+.store-data {
+  padding: 6px;
+  height: 100%;
+  overflow: scroll;
+}
+
+.store-data .store-wrap {
+  min-width: 200px;
+  border: 1px solid #787878;
+  border-radius: 5px;
+  padding: 10px 5px;
+  margin-top: 10px;
+}
+
+.store-data .store-wrap h3 {
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+}
+
+.store-data .store-wrap p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.store-data .store-wrap p b {
+  font-weight: bold;
+}
+
+.mask-map {
+  width: 80%;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+/*# sourceMappingURL=all.css.map */
