@@ -1,7 +1,7 @@
 <template>
   <div class="wrap-flex">
     <div class="region-wrap">
-      <div class="region-selsec">
+      <div class="region-select">
         <div class="county">
           <select name="county" v-model="select.county" @change="updatedArea">
             <option :value="item.CityName" v-for="(item, key) in countySelect" :key="key">{{item.CityName}}</option>
@@ -20,37 +20,19 @@
         </div>
       </div>
       <div class="store-data">
-        <div class="store-wrap" v-for="(item, index) in CurrentlyPharmacy" :key="index" @click=googleUrl(item.properties.address)>
-          <h3>{{item.properties.name}}</h3>
-          <div>
-            <span class="mask-num" :class="{'mask-safety': item.properties.mask_adult > 200,'mask-danger':item.properties.mask_adult<=200}">
-              <p>成人口罩</p>
-              <b>{{item.properties.mask_adult}}</b>/片
-            </span>
-            <span class="mask-num" :class="{'mask-safety': item.properties.mask_child > 200,'mask-danger':item.properties.mask_child<=200}">
-              <p>小孩口罩</p>
-              <b>{{item.properties.mask_child}}</b>/片
-            </span>
-          </div>
-         <p>{{item.properties.phone}}</p>
-         <p>{{item.properties.address}}</p>
-        </div>
+        <PharacyCard :data="CurrentlyPharmacy"></PharacyCard>
       </div>
     </div>
     <div class="mask-map">
       <div id="map"></div>
     </div>
-    <div class="msg-prompt" :class="{'d-none' : magDisplay}" @click="magDisplay = true">
-      <div class="msg-content">
-        <h2>{{select.county}}—{{select.area}}</h2>
-        <p>此區域沒有藥局資訊</p>
-        <a @click.prevent="magDisplay = true">關閉</a>
-      </div>
-    </div>
+    <MsgModal :item="select" @updateMaskModel="maskMsg"></MsgModal>
   </div>
 </template>
 
 <script>
+import MsgModal from '../components/MsgModel'
+import PharacyCard from '../components/PharmacyCard'
 import countySelect from '../assets/CityCountyData.json'
 import L from 'leaflet'
 let maskMap = {}
@@ -64,16 +46,20 @@ export default {
       CurrentlyPharmacy: [],
       select: {
         county: '臺北市',
-        area: ''
-      },
-      magDisplay: true
+        area: '',
+        msgDisplay: true
+      }
     }
   },
+  components: {
+    MsgModal,
+    PharacyCard
+  },
   methods: {
-    googleUrl (addres) {
-       window.open(`https://www.google.com.tw/maps/place/${addres}`, '_blank');
+    maskMsg () {
+      this.select.msgDisplay = true
     },
-        getNowTime () {
+    getNowTime () {
       var now = new Date()
       var H = now.getHours() + '：'
       var M = now.getMinutes() + '：'
@@ -83,10 +69,10 @@ export default {
     updatePharmacyAll () {
       let vm = this
       const url = `https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json`
-      this.$http.get(url).then(res => {
+      vm.$http.get(url).then(res => {
         vm.pharmacyAll = res.data.features
-        this.getNowTime()
-        this.updatedPharmacy(true)
+        vm.getNowTime()
+        vm.updatedPharmacy(true)
       })
     },
     updatedArea () {
@@ -114,26 +100,26 @@ export default {
         }
       })
       vm.CurrentlyPharmacy = areaPharmacy
-      this.removeMark()
-      this.addToMark()
+      vm.removeMark()
+      vm.addToMark()
       if (status !== true) {
-        this.updateMap()
+        vm.updateMap()
       }
     },
     updateMap () {
       let vm = this
-      if (this.CurrentlyPharmacy.length === 0) {
-        vm.magDisplay = false
+      if (vm.CurrentlyPharmacy.length === 0) {
+        vm.select.msgDisplay = false
       } else {
-        let right = this.CurrentlyPharmacy[0].geometry.coordinates[0]
-        let left = this.CurrentlyPharmacy[0].geometry.coordinates[1]
+        let right = vm.CurrentlyPharmacy[0].geometry.coordinates[0]
+        let left = vm.CurrentlyPharmacy[0].geometry.coordinates[1]
         maskMap.setView(new L.LatLng(left, right), 15)
       }
     },
     addToMark () {
       this.CurrentlyPharmacy.forEach(item => {
-        let adultColor = item.properties.mask_adult > 200 ? 'mask-safety': 'mask-danger'
-        let childColor = item.properties.mask_child > 200 ? 'mask-safety': 'mask-danger'
+        let adultColor = item.properties.mask_adult > 200 ? 'mask-safety' : 'mask-danger'
+        let childColor = item.properties.mask_child > 200 ? 'mask-safety' : 'mask-danger'
         L.marker([item.geometry.coordinates[1], item.geometry.coordinates[0]]).addTo(maskMap)
           .bindPopup(`<a class="mark-content" href="https://www.google.com.tw/maps/place/${item.properties.address}" target="_blank">
           <h3>${item.properties.name}</h3>
@@ -154,11 +140,9 @@ export default {
       })
     }
   },
-  created () {
+  mounted () {
     this.updatePharmacyAll()
     this.updatedArea()
-  },
-  mounted () {
     maskMap = L.map('map')
     maskMap.setView(new L.LatLng(25.039253, 121.517641), 15)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

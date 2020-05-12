@@ -1,21 +1,32 @@
-# vuecli3-mask
 
-## Project setup
-```
-npm install
-```
+# where mask 口罩地圖
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![](https://vera8357.github.io/where-mask/dist/img/dome-1.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Demo
+https://vera8357.github.io/where-mask/dist/#/
 
-### Lints and fixes files
-```
-npm run lint
-```
+
+#### 主要練習
++ VueCli3
++ axios 操作 API
++ Vue 自定義元件
++ 手刻css
++ RWD
+
+#### 使用外掛
++ [leaflet.js](https://leafletjs.com/)
+
+
+## 介紹
+- 桌機畫面 
+
+![](https://vera8357.github.io/where-mask/dist/img/dome-1.png)
+
+- 地圖標誌資訊
+
+![](https://vera8357.github.io/where-mask/dist/img/dome-3.png)
+
+- 手機畫面
+
+![](https://vera8357.github.io/where-mask/dist/img/dome-2.png)
