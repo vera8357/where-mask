@@ -25,7 +25,7 @@ https://vera8357.github.io/where-mask/dist/#/
 
 - 地圖標誌資訊
 
-![](https://vera8357.github.io/where-mask/dist/img/dome-3.png)
+![](https://vera8357.github.io/where-mask/dist/img/dome-3.PNG)
 
 - 手機畫面
 
