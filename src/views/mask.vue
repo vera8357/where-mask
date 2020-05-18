@@ -27,18 +27,21 @@
       <div id="map"></div>
     </div>
     <MsgModal :item="select" @updateMaskModel="maskMsg"></MsgModal>
+    <Loadimg :data="isloading"></Loadimg>
   </div>
 </template>
 
 <script>
 import MsgModal from '../components/MsgModel'
 import PharacyCard from '../components/PharmacyCard'
+import Loadimg from '../components/Loading'
 import countySelect from '../assets/CityCountyData.json'
 import L from 'leaflet'
 let maskMap = {}
 export default {
   data () {
     return {
+      isloading: false,
       nowTime: '',
       countySelect,
       areaSelect: [],
@@ -53,7 +56,8 @@ export default {
   },
   components: {
     MsgModal,
-    PharacyCard
+    PharacyCard,
+    Loadimg
   },
   methods: {
     maskMsg () {
@@ -65,15 +69,6 @@ export default {
       var M = now.getMinutes() + '：'
       var S = now.getSeconds()
       this.nowTime = H + M + S
-    },
-    updatePharmacyAll () {
-      let vm = this
-      const url = `https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json`
-      vm.$http.get(url).then(res => {
-        vm.pharmacyAll = res.data.features
-        vm.getNowTime()
-        vm.updatedPharmacy(true)
-      })
     },
     updatedArea () {
       let vm = this
@@ -87,8 +82,18 @@ export default {
       })
       vm.select.area = vm.areaSelect[0]
     },
+    updatePharmacyAll () {
+      let vm = this
+      const url = `https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json`
+      vm.$http.get(url).then(res => {
+        vm.pharmacyAll = res.data.features
+        vm.getNowTime()
+        vm.updatedPharmacy(true)
+      })
+    },
     updatedPharmacy (status) {
       let vm = this
+      vm.isloading = true
       let countyPharmacy = vm.pharmacyAll.filter(item => {
         if (item.properties.county === vm.select.county) {
           return item
@@ -109,6 +114,7 @@ export default {
     updateMap () {
       let vm = this
       if (vm.CurrentlyPharmacy.length === 0) {
+        vm.isloading = false
         vm.select.msgDisplay = false
       } else {
         let right = vm.CurrentlyPharmacy[0].geometry.coordinates[0]
@@ -131,6 +137,9 @@ export default {
           <p class="${childColor}">兒童口罩<span>${item.properties.mask_child}</span>/片</p>
           </a>`)
       })
+      setTimeout(() => {
+        this.isloading = false
+      }, 1000)
     },
     removeMark () {
       maskMap.eachLayer((layer) => {
@@ -141,6 +150,7 @@ export default {
     }
   },
   mounted () {
+    this.isloading = true
     this.updatePharmacyAll()
     this.updatedArea()
     maskMap = L.map('map')
